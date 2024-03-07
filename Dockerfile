@@ -1,21 +1,9 @@
-# Use an official Python runtime as a parent image
-FROM continuumio/miniconda3
+FROM python:3.8
 
-# Set the working directory
 WORKDIR /app
 
-# Copy environment file and create Conda environment
-COPY environment.yml .
-RUN conda env create -f environment.yml
+COPY . /app
 
-# Activate Conda environment
-SHELL ["conda", "run", "-n", "my_environment", "/bin/bash", "-c"]
+RUN pip install -r requirements.txt
 
-# Copy the application code into the container
-COPY . .
-
-# Expose the port on which the Flask app will run
-EXPOSE 8080
-
-# Set the default command to run the Flask app
-CMD ["conda", "run", "--no-capture-output", "-n", "myenv", "python", "app.py"]
+CMD ["python", "app.py"]
