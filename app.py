@@ -23,7 +23,7 @@ def get_face_embeddings(image_path):
     return face_embeddings
 
 # API Development
-@app.route('/api/identify_face', methods=['POST'])
+@app.route('/identify_face', methods=['POST'])
 def identify_face():
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
